@@ -1,0 +1,15 @@
+<h2>Imperative multiplication</h2>
+
+<label for="number1">Entier 1: </label>
+<input type="number" [(ngModel)]="factor1" (ngModelChange)="factor1Updated()">
+<br>
+<label for="number2">Entier 2: </label>
+<input type="number" [(ngModel)]="factor2" (ngModelChange)="multiply1And2()">
+<br>
+<label for="number2">Entier 3: </label>
+<input type="number" [(ngModel)]="factor3" (ngModelChange)="multiply1And3()">
+<br>
+<button (click)="reset()">Reset</button>
+
+<p>Multiplication de Entier 1 et 2 : {{ product1And2 }}</p>
+<p>Multiplication de Entier 1 et 3 : {{ product1And3 }}</p>
