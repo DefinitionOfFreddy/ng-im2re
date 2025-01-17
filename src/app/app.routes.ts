@@ -5,6 +5,6 @@ import { SignalMultiplicationComponent } from './signal-multiplication/signal-mu
 export const routes: Routes = [
     { path: 'imperative-multiplication', component: ImperativeMultiplicationComponent },
     { path: 'signal-multiplication', component: SignalMultiplicationComponent },
-    { path: '', redirectTo: '/imperative-multiplication', pathMatch: 'full' }
+    { path: '**', redirectTo: '/imperative-multiplication', pathMatch: 'full' }
   
 ];
