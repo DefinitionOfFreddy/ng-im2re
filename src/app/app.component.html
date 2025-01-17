@@ -1,11 +1,25 @@
-<nav>
-  <ul>
-    <li><a routerLink="/multiplication/imperative" routerLinkActive="active" ariaCurrentWhenActive="page">Imperative multiplication</a></li>
-    <li><a routerLink="/multiplication/rxjs" routerLinkActive="active" ariaCurrentWhenActive="page">Rxjs multiplication</a>
-    <li><a routerLink="/multiplication/signal" routerLinkActive="active" ariaCurrentWhenActive="page">Signal multiplication</a>
-    </li>
-  </ul>
-</nav>
+<div class="wrapper">
+  <nav>
+    <div>
+      <b>Multiplication</b>
+      <ul>
+        <li><a routerLink="/multiplication/imperative" routerLinkActive="active"
+            ariaCurrentWhenActive="page">Imperative</a></li>
+        <li><a routerLink="/multiplication/rxjs" routerLinkActive="active" ariaCurrentWhenActive="page">Rxjs</a>
+        <li><a routerLink="/multiplication/signal" routerLinkActive="active" ariaCurrentWhenActive="page">Signal</a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <b>Client</b>
+      <ul>
+        <li><a routerLink="/client/signal" routerLinkActive="active"
+            ariaCurrentWhenActive="page">Signal</a></li>
+      </ul>
+    </div>
+  </nav>
 
-
-<router-outlet></router-outlet>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</div>
