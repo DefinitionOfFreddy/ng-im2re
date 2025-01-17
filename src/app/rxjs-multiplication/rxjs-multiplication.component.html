@@ -1,0 +1,16 @@
+<h2>Rxjs multiplication</h2>
+
+<label for="number1">Entier 1: </label>
+<input type="number" [ngModel]="factor1 | async" (ngModelChange)="factor1.next($event)">
+<br>
+<label for="number2">Entier 2: </label>
+<input type="number" [ngModel]="factor2 | async" (ngModelChange)="factor2.next($event)">
+<br>
+<label for="number2">Entier 3: </label>
+<input type="number" [ngModel]="factor3 | async" (ngModelChange)="factor3.next($event)">
+<br>
+<button (click)="reset()">Reset</button>
+
+<p>Multiplication de Entier 1 et 2 : {{ product1And2$ | async }}</p>
+<p>Multiplication de Entier 1 et 3 : {{ product1And3$ | async  }}</p>
+<p>Multiplication de Entier 1 et 3 mais mal fait : {{ product1And3ButBadlyWritten }}</p>
