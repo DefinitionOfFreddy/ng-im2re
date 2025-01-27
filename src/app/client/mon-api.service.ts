@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { PokemonDetail, PokemonList } from './models';
+import { PokemonDetail, PokemonRequest } from './models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,8 +10,8 @@ export class MonApiService {
 
   constructor() { }
   httpClient = inject(HttpClient);
-  getPokemons(limit: number, offset: number): Observable<PokemonList> {
-    return this.httpClient.get<PokemonList>(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
+  getPokemons(limit: number, offset: number): Observable<PokemonRequest> {
+    return this.httpClient.get<PokemonRequest>(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
   }
 
 

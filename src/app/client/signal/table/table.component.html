@@ -1,8 +1,33 @@
-<p>table works!</p>
+<table>
+    <thead>
+        <tr>
+            <th>Number</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (pokemon of pokemonListWithPrevious(); track pokemon.name) {
+            <tr>
+                <td>{{pokemon.id}}</td>
+                <td>{{pokemon.name}}</td>
+            </tr>
+        } @empty {
+            <tr>
+                <td colspan="2">No pokemons found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 <div>
-    {{pokemonsSignal() | json}}
-
+    <button [disabled]="page() <= 1" (click)="page.set(page() - 1)">Previous</button> 
+    <label> Page : {{page()}} </label>
+    <button (click)="page.set(page() + 1)">Next</button>    
 </div>
+Status : {{ pokemonsResource.status().toString() }}
 
-<label>Page :</label><input type="number"[(ngModel)]="page">
+@if(pokemonsResource.isLoading()) {
+    <p>Loading...</p>
+} @else if (pokemonsResource.error()) {
+    <p>>Error: {{ pokemonsResource.error()}}</p>
+}

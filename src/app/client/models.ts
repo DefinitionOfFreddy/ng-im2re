@@ -1,11 +1,17 @@
-export interface PokemonList {
+export interface PokemonRequest {
     count: number,
     next: string,
     previous: string,
     results: {
         name: string,
         url: string
-    }[]
+    }[]    
+}
+
+export interface Pokemon {
+    name: string,
+    url: string,
+    id: string,
 }
 
 

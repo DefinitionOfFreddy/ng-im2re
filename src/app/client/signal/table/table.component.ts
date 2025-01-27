@@ -1,9 +1,15 @@
-import { Component, computed, effect, inject, Injector, Signal, signal, WritableSignal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, computed, effect, inject, Injector, linkedSignal, ResourceLoaderParams, ResourceStatus, Signal, signal, WritableSignal } from '@angular/core';
+import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import { MonApiService } from '../../mon-api.service';
 import { JsonPipe } from '@angular/common';
-import { PokemonList } from '../../models';
+import { Pokemon, PokemonRequest } from '../../models';
 import { FormsModule } from '@angular/forms';
+import { catchError, debounceTime, delay, map, switchMap } from 'rxjs';
+
+function getIdFromUrl(url: string) {
+  const parts = url.split('/');
+  return parts[parts.length - 2];
+}
 
 @Component({
   selector: 'app-table',
@@ -16,21 +22,32 @@ export class TableComponent {
   page = signal(1);
   limit = signal(10);
 
+  rs = ResourceStatus;
+
 
   private _injector = inject(Injector);
   private monApiService = inject(MonApiService);
-  pokemonsSignal: Signal<PokemonList | undefined>;
+  // pokemonsSignal: Signal<PokemonRequest | undefined>;
 
   // list: WritableSignal<PokemonList | undefined> = signal(undefined);
 
+  pokemonsResource = rxResource<Pokemon[], {page: number, limit: number}>({
+    request: () => ({page: this.page(), limit: this.limit()}),
+    loader: (params: ResourceLoaderParams<{page: number, limit: number}>) => {
+      return this.monApiService.getPokemons(params.request.limit, (params.request.page - 1) * params.request.limit)
+      .pipe(
+        catchError((error) => {throw new Error(`Unable to load ! : ${error}`)}),
+        delay(600),
+        map((response: PokemonRequest) => response.results.map(pokemon => {return {id: getIdFromUrl(pokemon.url), ...pokemon}})),
+      )
+    },
+  })
 
-  
-
-
-  constructor() {
-    this.pokemonsSignal = toSignal(
-      this.monApiService.getPokemons(this.limit(), (this.page() - 1) * this.limit()),      
-    );
-  }
-
+  pokemonListWithPrevious = linkedSignal<Pokemon[] | undefined, Pokemon[]>({
+    source: this.pokemonsResource.value,
+    computation: (newPokemons, previous) => {
+      if (newPokemons?.length) return newPokemons;
+      return previous?.value ?? []
+    }}
+  )
 }
