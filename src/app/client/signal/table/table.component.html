@@ -1,33 +1,41 @@
-<table>
-    <thead>
-        <tr>
-            <th>Number</th>
-            <th>Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (pokemon of pokemonListWithPrevious(); track pokemon.name) {
-            <tr>
-                <td>{{pokemon.id}}</td>
-                <td>{{pokemon.name}}</td>
-            </tr>
-        } @empty {
-            <tr>
-                <td colspan="2">No pokemons found.</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
 <div>
-    <button [disabled]="page() <= 1" (click)="page.set(page() - 1)">Previous</button> 
-    <label> Page : {{page()}} </label>
-    <button (click)="page.set(page() + 1)">Next</button>    
-</div>
-Status : {{ pokemonsResource.status().toString() }}
+    <table>
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Detail</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (pokemon of pokemonListWithPrevious(); track pokemon.name) {
+                <tr>
+                    <td>{{pokemon.id}}</td>
+                    <td>{{pokemon.name}}</td>
+                    <td><button type='button' [title]="'detail-'+ pokemon.id" (click)="selected.set(pokemon.url)">detail</button></td>
+                </tr>
+            } @empty {
+                <tr>
+                    <td colspan="2">No pokemons found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-@if(pokemonsResource.isLoading()) {
-    <p>Loading...</p>
-} @else if (pokemonsResource.error()) {
-    <p>>Error: {{ pokemonsResource.error()}}</p>
+    <div class="pagination">
+        <button [disabled]="page() <= 1" (click)="page.set(page() - 1)">Previous</button> 
+        <label> Page : {{page()}} </label>
+        <button (click)="page.set(page() + 1)">Next</button>    
+    </div>
+    Status : {{ pokemonsResource.status().toString() }}
+
+    @if(pokemonsResource.isLoading()) {
+        <p>Loading...</p>
+    } @else if (pokemonsResource.error()) {
+        <p>>Error: {{ pokemonsResource.error()}}</p>
+    }
+</div>
+
+@if(this.selected()) {
+    <app-detail [url]="selected()"></app-detail>
 }

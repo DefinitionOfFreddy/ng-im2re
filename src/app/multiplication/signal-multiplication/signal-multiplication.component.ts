@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-signal-multiplication',
   imports: [FormsModule],
+  standalone: true,
   templateUrl: './signal-multiplication.component.html',
   styleUrl: './signal-multiplication.component.scss'
 })

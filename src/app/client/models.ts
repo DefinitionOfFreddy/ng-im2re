@@ -14,7 +14,6 @@ export interface Pokemon {
     id: string,
 }
 
-
 export interface PokemonDetail {
     id: number,
     name: string,
@@ -129,6 +128,32 @@ export interface PokemonDetail {
         type: {
             name: string,
             url: string
+        }
+    }[]
+}
+
+
+export interface PokemonType {
+    id: number;
+    sprites: {
+        "generation-ix": {
+            "scarlet-violet": {
+                "name_icon": string
+            }
+        }
+    }
+}
+
+export interface PokemonSpecies {
+    egg_groups: {name: string}[];
+    capture_rate: number;
+    is_legendary: false;
+    is_mythical: false;
+    names: {
+        name: string;
+        language: {
+            name: string;
+            url: string;
         }
     }[]
 }

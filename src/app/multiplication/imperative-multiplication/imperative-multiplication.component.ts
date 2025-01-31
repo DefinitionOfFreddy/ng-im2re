@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-imperative-multiplication',
   imports: [FormsModule],
+  standalone: true,
   templateUrl: './imperative-multiplication.component.html',
   styleUrl: './imperative-multiplication.component.scss'
 })

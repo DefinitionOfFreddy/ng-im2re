@@ -1,0 +1,18 @@
+.spritePokemon {
+    width: 250px;
+}
+
+
+.detail {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+
+.infos {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  

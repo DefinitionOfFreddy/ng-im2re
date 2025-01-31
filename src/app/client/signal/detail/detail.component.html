@@ -1,0 +1,47 @@
+
+@let detail=pokemonDetailSignal();
+<!-- @let detail=(pokemonDetail$ | async); -->
+
+
+
+@if (detail) {
+    <h2>N°{{detail.id}} - {{detail.name}}</h2>
+    <div class="detail">
+        <div><img class="spritePokemon" src="{{detail.sprites.other?.['official-artwork']?.front_default}}" alt="Pokemon sprite." /></div>
+            <div class="infos">
+                <b>Type(s) :</b><span>
+                    @for (type of types(); track type) {
+                        <app-type [type]="type"></app-type>
+                    }
+                </span>
+                @if(speciesDetails.value()) {
+                    @let detail=speciesDetails.value()!;
+                    <b>Names : </b><ul>
+                        @for (item of detail.names; track $index) {
+                            <li>{{item.name}}({{item.language.name}})</li>
+                        }
+                    </ul>
+                    <b>Egg groups :</b><ul>
+                        @for (item of detail.egg_groups; track $index) {
+                            <li>{{item.name}}</li>
+                        }
+                    </ul>
+                    
+                    <b>Legendary :</b><span>@if(detail.is_legendary) {Yes} @else {No}</span>
+                    
+                    <b>Mythical :</b><span>@if(detail.is_mythical) {Yes} @else {No}</span>
+                }
+                @if(encounters()) {
+                    <b>Can be found in the wild ?</b>
+                    @if (encounters()?.length) {
+                        <span>yes, in {{encounters()?.length}} area(s) !</span>
+                    } @else {
+                        <span>No :(</span>
+                    }
+                }    
+            </div>
+    </div>
+    
+    
+}
+

@@ -1,0 +1,19 @@
+tr {
+    line-height: 1.2rem;
+    vertical-align: baseline;
+}
+
+td {
+    padding: 5px;
+}
+
+.pagination {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+:host {
+    display: flex;
+    gap: 3rem;
+    flex-flow: row wrap;
+}

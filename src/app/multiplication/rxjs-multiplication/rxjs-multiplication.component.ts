@@ -6,6 +6,7 @@ import { BehaviorSubject, combineLatest, map, merge } from 'rxjs';
 @Component({
   selector: 'app-rxjs-multiplication',
   imports: [FormsModule, AsyncPipe],
+  standalone: true,
   templateUrl: './rxjs-multiplication.component.html',
   styleUrl: './rxjs-multiplication.component.scss'
 })
