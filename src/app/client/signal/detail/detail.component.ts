@@ -10,12 +10,11 @@ import {
 import { MonApiService } from '../../mon-api.service';
 import { rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { of, switchMap } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 import { TypeComponent } from '../type/type.component';
 
 @Component({
   selector: 'app-detail',
-  imports: [AsyncPipe, TypeComponent],
+  imports: [TypeComponent],
   standalone: true,
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss',
@@ -54,7 +53,7 @@ export class DetailComponent {
   }
 
   encounters: WritableSignal<undefined | any[]> = signal(undefined);
-  
+
   //@deprecated ? : can be replaced by resource
   namedEffectEncountersExample = effect(async () => {
     const detail = this.pokemonDetailSignal();

@@ -1,11 +1,9 @@
-import { Component, ResourceStatus, computed, inject, input, resource } from '@angular/core';
-import { MonApiService } from '../../mon-api.service';
-import { JsonPipe } from '@angular/common';
+import { Component, computed, input, resource } from '@angular/core';
 import { PokemonType } from '../../models';
 
 @Component({
   selector: 'app-type',
-  imports: [JsonPipe],
+  imports: [],
   standalone: true,
   templateUrl: './type.component.html',
   styleUrl: './type.component.scss'
