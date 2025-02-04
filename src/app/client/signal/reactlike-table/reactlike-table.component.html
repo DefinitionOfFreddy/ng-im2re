@@ -1,0 +1,34 @@
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Detail</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (pokemon of displayed(); track pokemon.name) {
+                <tr>
+                    <td>{{pokemon.id}}</td>
+                    <td>{{pokemon.name}}</td>
+                    <td><button type='button' [title]="'detail-'+ pokemon.id" (click)="selected.set(pokemon.url)">detail</button></td>
+                </tr>
+            } @empty {
+                <tr>
+                    <td colspan="2">No pokemons found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <button [disabled]="page() <= 1" (click)="page.set(page() - 1)">Previous</button> 
+        <label> Page : {{page()}} </label>
+        <button (click)="page.set(page() + 1)">Next</button>    
+    </div>
+</div>
+
+@if(selected()) {
+    <app-detail [url]="selected()"></app-detail>
+}

@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { catchError, debounceTime, delay, map, switchMap } from 'rxjs';
 import { DetailComponent } from '../detail/detail.component';
 
-function getIdFromUrl(url: string) {
+export function getIdFromUrl(url: string) {
   const parts = url.split('/');
   return parts[parts.length - 2];
 }
@@ -32,14 +32,13 @@ function getIdFromUrl(url: string) {
   styleUrl: './table.component.scss',
 })
 export class TableComponent {
+  rs = ResourceStatus;
+  private monApiService = inject(MonApiService);
+
   page = signal(1);
   limit = signal(10);
-
-  rs = ResourceStatus;
-
   selected = signal('');
 
-  private monApiService = inject(MonApiService);
 
   pokemonsResource = rxResource<Pokemon[], { page: number; limit: number }>({
     request: () => ({ page: this.page(), limit: this.limit() }),

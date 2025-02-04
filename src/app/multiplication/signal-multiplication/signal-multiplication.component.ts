@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -20,4 +20,10 @@ export class SignalMultiplicationComponent {
     this.factor2.set(2);
     this.factor3.set(3);  
   }
+
+  myEffect = effect(() => {
+    this.product1And2();
+
+    console.log("this.product1And2Changed !")
+  })
 }
